@@ -1,0 +1,67 @@
+conky.config = {
+	alignment = 'middle_right',
+	background = true,
+	color2 = 'f59549',
+	color3 = '4d4d4d',
+	color4 = '2d2d2d',
+	cpu_avg_samples = 2,
+	default_color = 'FFFFFF',
+	double_buffer = true,
+	font = 'Bitstream Vera Sans:size=8',
+	draw_shades = false,
+	gap_x = 40,
+	gap_y = 40,
+	minimum_width = 600,
+	no_buffers = true,
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	update_interval = 2,
+	draw_graph_borders = false,
+	use_xft = true,
+	top_name_width = 10,
+}
+
+conky.text = [[
+# Time / Date
+${alignc}$color2${font Bitstream Vera Sans:size=26}${time %H : %M}
+${voffset -30}$alignc$color3${font Bitstream Vera Sans:size=12}${time %A, %d.%m.%Y}
+${hr}
+# Dowload / Upload
+${font Bitstream Vera Sans:size=9}\
+${offset 70}${color2}Down: ${color}${downspeed wlp60s0}${alignc -100}${color2}Up: $color${upspeed wlp60s0}
+# Download / Upload Graph
+$color2${offset 50}${downspeedgraph wlp60s0 100,220}${alignr 50}${upspeedgraph wlp60s0 100,220}
+$color3${hr}
+# cpu / mem
+${font Bitstream Vera Sans:size=10}${color2}${voffset 20}${offset 50}cpu${alignc}$color${cpubar cpu0 15,100}
+${if_match ${cpu cpu0} >= 70}$color2$else$color3$endif\
+${voffset -35}${alignr 50}${cpu cpu0}%
+${color2}${voffset 10}${offset 50}mem${alignc}$color${membar 15,100}
+${if_match ${memperc} >= 80}$color2$else$color3$endif\
+${voffset -35}${alignr 50}$color3${memperc}%
+${color2}${voffset 10}${offset 50}swap${alignc}$color${swapbar 15,100}
+${if_match ${swapperc} >= 80}$color2$else$color3$endif\
+${voffset -35}${alignr 50}$color3${swapperc}%
+# cpu graph
+$color2${alignc}${voffset 20}${cpugraph cpu0 120,500 color2 color3 -l -t}
+$color3$alignc${voffset -150}cpu
+$color3${voffset 110}${hr 1}
+#
+$color4${execbar 33,195 "echo 100"} ${execbar 35,195 "echo 100"} ${execbar 35,195 "echo 100"}
+${font Bitstream Vera Sans:size=10}$color${offset 50}${voffset -53}Name\
+${font Bitstream Vera Sans:size=10}$color${offset 145}Cpu\
+${font Bitstream Vera Sans:size=10}$color${alignr 50}Mem
+ ${voffset 10}$color2${top name 1}${alignr 50}$color${top mem_res 1}
+${voffset -30}${alignc}${top cpu 1}%
+ ${voffset 10}$color2${top name 2}${alignr 50}$color${top mem_res 2}
+${voffset -30}${alignc}${top cpu 2}%
+ ${voffset 10}$color2${top name 3}${alignr 50}$color${top mem_res 3}
+${voffset -30}${alignc}${top cpu 3}%
+ ${voffset 10}$color2${top name 4}${alignr 50}$color${top mem_res 4}
+${voffset -30}${alignc}${top cpu 4}%
+ ${voffset 10}$color2${top name 5}${alignr 50}$color${top mem_res 5}
+${voffset -30}${alignc}${top cpu 5}%
+ ${voffset 10}$color2${top name 6}${alignr 50}$color${top mem_res 6}
+${voffset -30}${alignc}${top cpu 6}%
+]]
