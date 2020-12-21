@@ -1,5 +1,7 @@
 # i3 Configs
 
+A repo with various config files for i3-wm related tools.
+
 ## Current configs available
 
 ## Conky
