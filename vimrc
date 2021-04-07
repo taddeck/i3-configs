@@ -18,6 +18,22 @@ Plug 'tmhedberg/SimpylFold'			"Better folding
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kjwon15/vim-transparent'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Language server support
+" Track the engine.
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Coc-extentions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-explorer', 'xml', 'coc-texlab', 'coc-sh', 'coc-python', 'coc-docker', 'coc-cmake', 'clangd']
+
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe " - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<S-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 call plug#end()
@@ -55,17 +71,41 @@ autocmd VimEnter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "COC.nvim Config
-"	set hidden
-"set nobackup
-"set nowritebackup
-"set cmdheight=2
-"set updatetime=100
-"set shortmess+=c
-"set signcolumn=yes
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=100
+set shortmess+=c
+set signcolumn=yes
 
+" tab completion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+" goto defenition
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Docu
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 
 "Theme
 set termguicolors
@@ -102,5 +142,4 @@ let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreeExtensionHighlightColor['c'] = s:orange
 let g:NERDTreeExtensionHighlightColor['java'] = s:blue
 let g:NERDTreeExtensionHighlightColor['py'] = s:yellow
-
 
