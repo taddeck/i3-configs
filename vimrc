@@ -26,7 +26,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Coc-extentions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-explorer', 'xml', 'coc-texlab', 'coc-sh', 'coc-python', 'coc-docker', 'coc-cmake', 'clangd']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-explorer', 'coc-xml', 'coc-texlab', 'coc-sh', 'coc-python', 'coc-docker', 'coc-cmake', 'coc-clangd']
 
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
